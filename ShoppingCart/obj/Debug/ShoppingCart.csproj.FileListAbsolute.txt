@@ -1,0 +1,16 @@
+C:\Users\kiran\Downloads\ShoppingCart\ShoppingCart\bin\ShoppingCart.dll.config
+C:\Users\kiran\Downloads\ShoppingCart\ShoppingCart\bin\ShoppingCart.dll
+C:\Users\kiran\Downloads\ShoppingCart\ShoppingCart\bin\ShoppingCart.pdb
+C:\Users\kiran\Downloads\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.csprojResolveAssemblyReference.cache
+C:\Users\kiran\Downloads\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.dll
+C:\Users\kiran\Downloads\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.pdb
+C:\Users\charkamk\Desktop\Angular\ShoppingCart\ShoppingCart\ShoppingCart\bin\ShoppingCart.dll.config
+C:\Users\charkamk\Desktop\Angular\ShoppingCart\ShoppingCart\ShoppingCart\bin\ShoppingCart.dll
+C:\Users\charkamk\Desktop\Angular\ShoppingCart\ShoppingCart\ShoppingCart\bin\ShoppingCart.pdb
+C:\Users\charkamk\Desktop\Angular\ShoppingCart\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.dll
+C:\Users\charkamk\Desktop\Angular\ShoppingCart\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.pdb
+C:\Users\kiran\Desktop\Test\ShoppingCart (1)\ShoppingCart\ShoppingCart\bin\ShoppingCart.dll.config
+C:\Users\kiran\Desktop\Test\ShoppingCart (1)\ShoppingCart\ShoppingCart\bin\ShoppingCart.dll
+C:\Users\kiran\Desktop\Test\ShoppingCart (1)\ShoppingCart\ShoppingCart\bin\ShoppingCart.pdb
+C:\Users\kiran\Desktop\Test\ShoppingCart (1)\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.dll
+C:\Users\kiran\Desktop\Test\ShoppingCart (1)\ShoppingCart\ShoppingCart\obj\Debug\ShoppingCart.pdb
