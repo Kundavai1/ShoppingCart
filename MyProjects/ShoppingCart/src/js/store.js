@@ -1,4 +1,4 @@
-﻿//----------------------------------------------------------------
+//----------------------------------------------------------------
 // store (contains the products)
 //
 // NOTE: nutritional info from http://www.cspinet.org/images/fruitcha.jpg
@@ -9,7 +9,7 @@
 // 3: 20-40% DV
 // 4: above 40% DV
 //
-function store() {
+function store($http) {
     this.products = [
         new product("APL", "Apple", "Eat one every day to keep the doctor away!", 12, 90, 0, 2, 0, 1, 2),
         new product("AVC", "Avocado", "Guacamole anyone?", 16, 90, 0, 1, 1, 1, 2),
@@ -47,11 +47,11 @@ function store() {
         "between 20 and 40%",
         "above 40%"
     ];
-}
-store.prototype.getProduct = function (sku) {
-    for (var i = 0; i < this.products.length; i++) {
-        if (this.products[i].sku == sku)
-            return this.products[i];
+
+    this.getProduct = function (sku) {
+        var self = this;
+        return $http.get('/products/' + sku);
+
     }
-    return null;
+
 }
