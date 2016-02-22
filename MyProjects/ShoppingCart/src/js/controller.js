@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 // the storeController contains two objects:
 // - store: contains the product list
@@ -11,6 +11,13 @@ function storeController($scope, $routeParams, DataService) {
 
     // use routing to pick the selected product
     if ($routeParams.productSku != null) {
-        $scope.product = $scope.store.getProduct($routeParams.productSku);
+        $scope.store.getProduct($routeParams.productSku).then(function (responce) {
+            $scope.product = responce.data;
+        }, function (error) {
+            if (error.status == 404) {
+                alert('Not found');
+            } else
+                alert('Error occured');
+        });
     }
 }
