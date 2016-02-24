@@ -1,8 +1,8 @@
-﻿module shoppingCart.Interfaces {
+module shoppingCart.Interfaces {
 
     export interface IProductService {
-        getProducts: () => Array<shoppingCart.Models.Product>;
-        getProduct: (productCode: string) => shoppingCart.Models.Product;
+        getProducts: () => ng.IPromise<Array<shoppingCart.Models.Product>>;
+        getProduct: (productCode: string) => ng.IPromise<shoppingCart.Models.Product>;
 
     }
 } 
