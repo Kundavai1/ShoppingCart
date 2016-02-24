@@ -1,4 +1,4 @@
-﻿/// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../scripts/typings/angularjs/angular.d.ts" />
 /// <reference path="../../scripts/typings/angularjs/angular-route.d.ts" />
 module shoppingCart {
     export class Routes {
@@ -6,16 +6,16 @@ module shoppingCart {
         static configureRoutes($routeProvider: ng.route.IRouteProvider) {
             $routeProvider.
                 when('/store', {
-                    templateUrl: 'partials/store.htm',
+                    templateUrl: 'Views/store.htm',
                     controller: shoppingCart.controllers.StoreController
                 }).
                 when('/products/:productSku', {
-                    templateUrl: 'partials/product.htm',
+                    templateUrl: 'Views/product.htm',
                     controller: shoppingCart.controllers.StoreController
 
                 }).
                 when('/cart', {
-                    templateUrl: 'partials/shoppingCart.htm',
+                    templateUrl: 'Views/shoppingCart.htm',
                     controller: shoppingCart.controllers.StoreController
 
                 }).
