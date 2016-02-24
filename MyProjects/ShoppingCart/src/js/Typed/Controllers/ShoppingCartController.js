@@ -4,12 +4,28 @@ var shoppingCart;
     var controllers;
     (function (controllers) {
         var ShoppingCartController = (function () {
-            // save items to local storage when unloading
-            function ShoppingCartController($scope, cartItem) {
+            function ShoppingCartController() {
+                var _this = this;
+                this.cartName = "shoppingCart";
                 this.clearCart = false;
-                this.checkoutParameters = {};
+                this.items = [];
                 // load items from local storage when initializing
                 this.loadItems = function () {
+                    var items = localStorage != null ? localStorage[_this.cartName + "_items"] : null;
+                    if (items != null && JSON != null) {
+                        try {
+                            var items = JSON.parse(items);
+                            for (var i = 0; i < items.length; i++) {
+                                var item = items[i];
+                                if (item.sku != null && item.name != null && item.price != null && item.quantity != null) {
+                                    item = new shoppingCart.Models.CartItem(item.sku, item.name, item.price, item.quantity);
+                                    _this.items.push(item);
+                                }
+                            }
+                        }
+                        catch (err) {
+                        }
+                    }
                 };
                 // save items to local storage
                 this.saveItems = function () {
@@ -70,20 +86,12 @@ var shoppingCart;
                     this.saveItems();
                 };
                 // check out
-                this.checkout = function (serviceName, clearCart) {
-                    // select serviceName if we have to
-                    if (serviceName == null) {
-                        var p = this.checkoutParameters[Object.keys(this.checkoutParameters)[0]];
-                        serviceName = p.serviceName;
-                    }
-                    // sanity
-                    if (serviceName == null) {
-                        throw "Use the 'addCheckoutParameters' method to define at least one checkout service.";
-                    }
-                    // go to work
-                    var parms = this.checkoutParameters[serviceName];
-                    if (parms == null) {
-                        throw "Cannot get checkout parameters for '" + serviceName + "'.";
+                this.checkout = function (clearCart) {
+                    if (clearCart) {
+                        this.clearItems();
+                        var random = Math.random().toString();
+                        alert("Order sucessfully placed with Id:" + random.substr(1, 7));
+                        location.href = "defaultTyped.html#/store";
                     }
                 };
                 // utility methods
@@ -101,12 +109,20 @@ var shoppingCart;
                     value = value * 1;
                     return isNaN(value) ? 0 : value;
                 };
+                var self = this;
+                $(window).unload(function () {
+                    if (self.clearCart) {
+                        self.clearItems();
+                    }
+                    self.saveItems();
+                    self.clearCart = false;
+                });
+                self.loadItems();
             }
-            ShoppingCartController.$inject = ["$scope", "shoppingCart.Models.CartItem"];
             return ShoppingCartController;
         })();
         controllers.ShoppingCartController = ShoppingCartController;
-        angular.module("shoppingCart").controller("shoppingCart.controllers.ShoppingCartController", ShoppingCartController);
+        angular.module("shoppingCart").controller("ShoppingCartController", ShoppingCartController);
     })(controllers = shoppingCart.controllers || (shoppingCart.controllers = {}));
 })(shoppingCart || (shoppingCart = {}));
 //# sourceMappingURL=ShoppingCartController.js.map
