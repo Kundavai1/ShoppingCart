@@ -1,20 +1,43 @@
-﻿/// <reference path="../../../scripts/typings/angularjs/angular.d.ts" />
+/// <reference path="../../../scripts/typings/angularjs/angular.d.ts" />
 module shoppingCart.controllers {
 
     export class ShoppingCartController {
-        static $inject = ["$scope", "shoppingCart.Models.CartItem"];
-        // save items to local storage when unloading
-        constructor($scope: ng.IScope, cartItem: shoppingCart.Models.CartItem) {
+
+        constructor() {
+
+            var self = this;
+            $(window).unload(() => {
+                if (self.clearCart) {
+                    self.clearItems();
+                }
+                self.saveItems();
+                self.clearCart = false;
+            });
+            self.loadItems();
         }
 
-        cartName: string;
+        cartName: string = "shoppingCart";
         clearCart: boolean = false;
-        checkoutParameters: any = {};
-        items: shoppingCart.Models.CartItem;
-
+        items: shoppingCart.Models.CartItem[] = [];
+        
         // load items from local storage when initializing
         loadItems = () => {
-
+            var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;
+            if (items != null && JSON != null) {
+                try {
+                    var items = JSON.parse(items);
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+                        if (item.sku != null && item.name != null && item.price != null && item.quantity != null) {
+                            item = new shoppingCart.Models.CartItem(item.sku, item.name, item.price, item.quantity);
+                            this.items.push(item);
+                        }
+                    }
+                }
+                catch (err) {
+                    // ignore errors while loading...
+                }
+            }
         };
 
 
@@ -87,23 +110,14 @@ module shoppingCart.controllers {
         
 
         // check out
-        checkout = function (serviceName, clearCart) {
+        checkout = function (clearCart) {
 
-            // select serviceName if we have to
-            if (serviceName == null) {
-                var p = this.checkoutParameters[Object.keys(this.checkoutParameters)[0]];
-                serviceName = p.serviceName;
-            }
+            if (clearCart) {
 
-            // sanity
-            if (serviceName == null) {
-                throw "Use the 'addCheckoutParameters' method to define at least one checkout service.";
-            }
-
-            // go to work
-            var parms = this.checkoutParameters[serviceName];
-            if (parms == null) {
-                throw "Cannot get checkout parameters for '" + serviceName + "'.";
+                this.clearItems();
+                var random = Math.random().toString();
+                alert("Order sucessfully placed with Id:" + random.substr(1, 7));
+                location.href = "defaultTyped.html#/store";
             }
 
         }
@@ -128,5 +142,5 @@ module shoppingCart.controllers {
     }
 
 
-    angular.module("shoppingCart").controller("shoppingCart.controllers.ShoppingCartController", ShoppingCartController);
+    angular.module("shoppingCart").controller("ShoppingCartController", ShoppingCartController);
 }
